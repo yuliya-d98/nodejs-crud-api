@@ -1,12 +1,13 @@
 {
   "name": "nodejs-crud-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "start": "node build/index.js",
-    "build": "tsc",
+    "start:dev": "cross-env NODE_ENV=development nodemon -e ts -w ./src -x npm run watch:serve",
+    "watch:serve": "node --loader ts-node/esm src/index.ts",
+    "start:prod": "cross-env NODE_ENV=production npm run build",
+    "build": "tsc && node build/index.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier . --write"
@@ -16,17 +17,21 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "typescript": "^5.6.3"
+    "dotenv": "^16.4.5",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^22.7.7",
+    "@types/uuid": "^10.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.13.0",
     "globals": "^15.11.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
     "typescript-eslint": "^8.10.0"
   }
 }
